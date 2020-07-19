@@ -1,6 +1,0 @@
-{
-  "clientUrl": "http://account.pender.test:5000",
-  "api": {
-    "url": "http://api.pender.test:5000/account/v0"
-  }
-}
