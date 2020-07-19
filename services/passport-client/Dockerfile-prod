@@ -36,4 +36,20 @@ COPY nginx/nginx.conf /etc/nginx/conf.d
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+# Copy .env file and shell script to container
+WORKDIR /usr/share/nginx/html
+COPY ./env.sh .
+COPY ./prestart.sh .
+COPY .env .
+
+# for envsubst command
+RUN apk add gettext
+
+# Add bash
+RUN apk add --no-cache bash
+
+# Make our shell script executable
+RUN chmod +x prestart.sh
+
+# Start Nginx server
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/prestart.sh && nginx -g \"daemon off;\""]

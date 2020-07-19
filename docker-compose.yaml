@@ -25,13 +25,16 @@ services:
       - passport-db
 
   passport-client:
+    # build:
+      # context: ./services/passport-client
+      # dockerfile: Dockerfile-prod
     build: ./services/passport-client
     env_file:
       - ./environment/passport-client.development.env
-    environment:
-      - PORT=3000
-    volumes:
-      - ./services/passport-client/src:/app/src:delegated
+    # environment:
+    #   - PORT=3000
+    # volumes:
+    #   - ./services/passport-client/src:/app/src:delegated
     ports:
       - 4002:3000
     restart: always

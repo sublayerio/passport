@@ -19,18 +19,18 @@ class SignInRoute extends React.Component {
     }
 
     getClientId = () => {
-        return getQuery().clientId || process.env.REACT_APP_CLIENT_ID
+        return getQuery().clientId || window._env_.REACT_APP_CLIENT_ID
     }
 
     getRedirectUrl = () => {
-        return getQuery().redirectUrl || process.env.REACT_APP_CLIENT_URL
+        return getQuery().redirectUrl || window._env_.REACT_APP_CLIENT_URL
     }
 
     async componentWillMount() {
 
         const clientId = this.getClientId()
 
-        if (clientId === process.env.REACT_APP_CLIENT_ID && this.props.session) {
+        if (clientId === window._env_.REACT_APP_CLIENT_ID && this.props.session) {
             this.props.history.push('/dashboard')
             return
         }
