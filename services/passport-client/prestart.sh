@@ -7,4 +7,4 @@
 cp env-config.js ./public/
 
 # Create index.html based of index.template.html
-envsubst < ./public/index.template.html > ./public/index.html
+envsubst < ./public/index.html > ./public/index.html

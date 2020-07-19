@@ -1,5 +1,10 @@
 FROM node:10 as build
 
+RUN apt-get update
+
+# for envsubst command
+RUN apt-get install gettext -y
+
 # WORKDIR specifies the directory our
 # application's code will live within
 WORKDIR /app
@@ -16,9 +21,7 @@ RUN yarn install
 # To the app directory
 COPY . /app
 
-ENV REACT_APP_CLIENT_URL=https://passport.sublayer.io
-ENV REACT_APP_CLIENT_ID=appUPnISHngGtASfu
-ENV REACT_APP_API_URL=https://api.sublayer.io/passport/v0
+RUN cp ./public/index.template.html ./public/index.html
 
 # We start our application by calling
 # npm start
@@ -39,17 +42,14 @@ EXPOSE 80
 # Copy .env file and shell script to container
 WORKDIR /usr/share/nginx/html
 COPY ./env.sh .
-COPY ./prestart.sh .
+COPY ./prestart-prod.sh .
 COPY .env .
-
-# for envsubst command
-RUN apk add gettext
 
 # Add bash
 RUN apk add --no-cache bash
 
 # Make our shell script executable
-RUN chmod +x prestart.sh
+RUN chmod +x prestart-prod.sh
 
 # Start Nginx server
-CMD ["/bin/bash", "-c", "/usr/share/nginx/html/prestart.sh && nginx -g \"daemon off;\""]
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/prestart-prod.sh && nginx -g \"daemon off;\""]
