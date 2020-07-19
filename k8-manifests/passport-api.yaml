@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: passport-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: passport-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: passport-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: passport-api
+  template:
+    metadata:
+      labels:
+        app: passport-api
+    spec:
+      containers:
+        - name: passport-api
+          image: sublayer/passport-api:v1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: passport-api-config
+            - secretRef:
+                name: passport-api-secret

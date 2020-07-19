@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  passport-db:
+    build: ./services/passport-db
+    ports:
+      - 9090:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: root
+
+  passport-api:
+    build: ./services/passport-api
+    env_file:
+      - ./environment/passport-api.development.env
+    environment:
+      - PORT=3000
+    volumes:
+      - ./services/passport-api:/app:delegated
+    ports:
+      - 4001:3000
+    restart: always
+    depends_on:
+      - passport-db
+
+  passport-client:
+    build: ./services/passport-client
+    env_file:
+      - ./environment/passport-client.development.env
+    environment:
+      - PORT=3000
+    volumes:
+      - ./services/passport-client/src:/app/src:delegated
+    ports:
+      - 4002:3000
+    restart: always
+    depends_on:
+      - passport-api
