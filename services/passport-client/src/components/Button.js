@@ -7,7 +7,7 @@ const Button = props => (
         className={cx(
             css`
             padding: 12px 24px;
-            background-color: ${props.theme === 'danger' ? 'red' : '#0022fd'};
+            background-color: ${props.theme === 'danger' ? 'var(--red)' : 'rgb(var(--primaryColorDarker))'};
             box-shadow: 0 0 0 1px rgba(0,0,0,.09), 0 1px 0 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.1);
             -webkit-transition: all .1s ease-out;
     transition: all .1s ease-out;

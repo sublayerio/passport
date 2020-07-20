@@ -34,7 +34,7 @@ const verify = props => (
       cx="34.5"
       cy="34.5"
       r="34.5"
-      fill="rgba(217, 212, 255, var(--primaryColorLightestAlpha))"
+      fill="rgba(var(--primaryColorLightest), var(--primaryColorLightestAlpha))"
       fillOpacity="1"
     />
     <path
@@ -47,7 +47,7 @@ const verify = props => (
     <path d="M17.5247 24.0442H51.9243V29.2171H17.5247V24.0442Z" fill="white" />
     <path
       d="M29.8056 38.9438C30.742 38.2247 30.8401 36.8491 30.0153 36.0043L18.0132 23.7111C17.4945 23.1798 16.626 23.2286 16.1701 23.8148L16.1701 45.4177C16.1701 47.052 18.0449 47.976 19.341 46.9806L29.8056 38.9438Z"
-      fill="rgba(217, 212, 255, var(--primaryColorLightestAlpha))"
+      fill="rgba(var(--primaryColorLightest), var(--primaryColorLightestAlpha))"
       fillOpacity="1"
     />
     <path
@@ -59,7 +59,7 @@ const verify = props => (
     />
     <path
       d="M39.6065 38.9438C38.6701 38.2247 38.572 36.8491 39.3968 36.0043L51.3989 23.7111C51.9176 23.1798 52.7861 23.2286 53.242 23.8148L53.242 45.4177C53.242 47.052 51.3672 47.976 50.0711 46.9806L39.6065 38.9438Z"
-      fill="rgba(217, 212, 255, var(--primaryColorLightestAlpha))"
+      fill="rgba(var(--primaryColorLightest), var(--primaryColorLightestAlpha))"
       fillOpacity="1"
     />
     <path
@@ -71,7 +71,7 @@ const verify = props => (
     />
     <path
       d="M33.5366 31.6221C34.2379 31.095 35.2033 31.095 35.9046 31.6221L52.6157 44.1829C54.1287 45.3201 53.3244 47.7288 51.4316 47.7288H18.0096C16.1169 47.7288 15.3126 45.3201 16.8256 44.1829L33.5366 31.6221Z"
-      fill="rgba(217, 212, 255, var(--primaryColorLightestAlpha))"
+      fill="rgba(var(--primaryColorLightest), var(--primaryColorLightestAlpha))"
       fillOpacity="1"
     />
     <path
@@ -83,7 +83,7 @@ const verify = props => (
     />
     <path
       d="M33.3805 40.9461C34.1363 41.6523 35.3095 41.654 36.0672 40.9499L52.7857 25.4166C54.0976 24.1977 53.2351 22.0023 51.4444 22.0023L18.1022 22.0023C16.3141 22.0023 15.4503 24.192 16.7568 25.4128L33.3805 40.9461Z"
-      fill="rgba(217, 212, 255, var(--primaryColorLightestAlpha))"
+      fill="rgba(var(--primaryColorLightest), var(--primaryColorLightestAlpha))"
       fillOpacity="1"
     />
     <path

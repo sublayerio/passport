@@ -1,6 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {css} from 'emotion'
+import { connect } from 'react-redux'
+import { css } from 'emotion'
 import Page from '../Page'
 import Link from '../components/Link'
 import FormGroup from '../components/FormGroup'
@@ -8,7 +8,7 @@ import LoadingState from '../components/LoadingState'
 import icons from '../icons2'
 import api from "../services/api";
 
-const ButtonCard = ({href, icon, title, children}) => (
+const ButtonCard = ({ href, icon, title, children }) => (
     <a
         href={href}
         className={css`
@@ -25,7 +25,7 @@ const ButtonCard = ({href, icon, title, children}) => (
             }
         `}
     >
-        {icon({width: 28, className: css`margin-bottom: 8px;`})}
+        {icon({ width: 28, className: css`margin-bottom: 8px;` })}
         <h3
             className={css`
                 margin-top: 0;
@@ -87,11 +87,11 @@ class DashboardRoute extends React.Component {
 
     render() {
 
-        const {displayName, loading} = this.state
+        const { displayName, loading } = this.state
 
         if (loading) return (
             <Page>
-                <LoadingState/>
+                <LoadingState />
             </Page>
         )
 
@@ -116,8 +116,8 @@ class DashboardRoute extends React.Component {
                             margin-bottom: 48px;
                         `}
                     >
-                        Hi <strong>{displayName}</strong>, <br/><br/>
-                        Thanks for making use of Sublayer Account!
+                        Welcome <strong>{displayName}</strong>, <br /><br />
+        Thanks for making use of {window._env_.REACT_APP_TITLE}!
                     </div>
                 </FormGroup>
                 <div

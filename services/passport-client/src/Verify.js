@@ -5,13 +5,13 @@ import CheckMail from "./CheckMail";
 const Verify = ({ email }) => {
   const [stay, setStay] = useState(false);
 
-  // useEffect(() => {
-  //   let int = setInterval(() => setStay(!stay), 3000);
+  useEffect(() => {
+    let int = setInterval(() => setStay(!stay), 3000);
 
-  //   return () => {
-  //     clearInterval(int);
-  //   };
-  // });
+    return () => {
+      clearInterval(int);
+    };
+  });
 
   if (stay) {
     return <Stay />;

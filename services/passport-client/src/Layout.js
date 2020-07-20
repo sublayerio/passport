@@ -17,8 +17,8 @@ class Layout extends React.Component {
                         <MenuBrand
                             theme={theme}
                             imageFitTypeId={'cover'}
-                            imageUrl={'https://avatars2.githubusercontent.com/u/66509471?s=200&v=4'}
-                            title={'Passport'}
+                            imageUrl={window._env_.REACT_APP_BRAND_IMAGE_URL}
+                            title={window._env_.REACT_APP_TITLE}
                             description={'v1.0.0'}
                         />
                         <MenuContainer>

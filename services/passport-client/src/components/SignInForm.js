@@ -110,7 +110,7 @@ export default class SignInForm extends React.Component {
                                 }
                                 &:focus {
                                     outline: 0;
-                                    box-shadow: inset 0 0 0 2px #0022fd, 0 2px 4px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.1);
+                                    box-shadow: inset 0 0 0 2px rgb(var(--primaryColor)), 0 2px 4px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.1);
                                     -webkit-transition-duration: 0s;
                                     transition-duration: 0s;
                                 }
@@ -141,6 +141,7 @@ export default class SignInForm extends React.Component {
                     >
                         {t('SignInForm.toContinueDescription', {
                             bindings: {
+                                applicationTitle: window._env_.REACT_APP_TITLE,
                                 companyName,
                                 privacyPolicyUrl,
                                 termsOfServiceUrl

@@ -5,6 +5,7 @@
   "dependencies": {
     "@cmds/icons": "^0.2.0",
     "@cmds/sidebar": "^0.4.0",
+    "@sublayer/ui": "^1.0.4",
     "axios": "^0.18.0",
     "emotion": "^10.0.9",
     "history": "^4.9.0",
