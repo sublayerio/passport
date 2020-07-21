@@ -1,9 +1,37 @@
+const path = require('path')
 const cors = require('cors')
 const express = require('express')
 const morgan = require('morgan')
 const middleware = require('./middleware')
 const mailExamples = require('./routes/mailExamples')
 const pkg = require('../package.json')
+const bodyParser = require('body-parser')
+
+const createConnection = require('./database/createConnection')
+const createSchema = require("./sdk/schema/createSchema")({
+    configPath: path.join(__dirname, 'schema.yaml')
+})
+
+const schema = createSchema()()
+
+const db = createConnection({
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE
+})
+
+const createContext = require('./sdk/context/createContext')({
+    schema,
+    db
+})
+
+const handle = require('./sdk/http/handle')({ createContext })
+
+const getRecords = require('./sdk/model/getRecords')
+const getRecord = require('./sdk/model/getRecord')
+const getComponent = require('./sdk/model/getComponent')
 
 const app = express()
 
@@ -12,6 +40,14 @@ mailExamples(app)
 app.use(cors())
 
 app.use(morgan('tiny'))
+
+app.get("/v0/schema", handle(ctx => () => ctx.schema))
+
+app.get("/v0/records/:modelId", handle(getRecords));
+
+app.get("/v0/record/:modelId/:recordId", handle(getRecord));
+
+app.post("/v0/component/has-many", bodyParser.json(), handle(getComponent));
 
 app.get('/', (req, res) => {
 

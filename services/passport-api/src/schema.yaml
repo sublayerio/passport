@@ -1,0 +1,305 @@
+apiVersion: v1
+kind: Application
+spec:
+  id: 1
+  name: Sublayer Passport
+  description: Version v1.0.0
+  logoUrl: /klasse@2.png
+---
+apiVersion: v1
+kind: NavItem
+spec:
+  id: application
+  type: ModelListPage
+  modelId: Application
+---
+apiVersion: v1
+kind: NavItem
+spec:
+  id: user
+  type: ModelListPage
+  modelId: User
+---
+apiVersion: v1
+kind: NavItem
+spec:
+  id: session
+  type: ModelListPage
+  modelId: Session
+---
+apiVersion: v1
+kind: NavItem
+spec:
+  id: group
+  type: ModelListPage
+  modelId: Group
+---
+apiVersion: v1
+kind: NavItem
+spec:
+  id: role
+  type: ModelListPage
+  modelId: Role
+---
+apiVersion: v1
+kind: Model
+spec:
+  id: Application
+  name: Application
+  plural: Applications
+  identifierKey: app
+  collectionKey: applications
+  tableName: applications
+  primaryField: name
+  clearable: true
+  fields:
+    - id: name
+      name: Name
+      type: text
+      required: true
+    - id: id
+      name: ID
+      type: id
+      required: true
+---
+apiVersion: v1
+kind: Model
+spec:
+  id: User
+  name: User
+  plural: Users
+  identifierKey: usr
+  collectionKey: users
+  tableName: users
+  primaryField: email
+  clearable: true
+  fields:
+    - id: email
+      name: Email
+      type: text
+      required: true
+    - id: firstName
+      name: First name
+      type: text
+      required: true
+    - id: lastName
+      name: Last name
+      type: text
+      required: true
+    - id: createdAt
+      name: Aangemaakt op
+      type: date
+      required: true
+      settings:
+        includeTime: true
+    - id: id
+      name: ID
+      type: id
+      required: true
+---
+apiVersion: v1
+kind: Model
+spec:
+  id: Session
+  name: Session
+  plural: Sessions
+  identifierKey: ses
+  collectionKey: sessions
+  tableName: sessions
+  clearable: true
+  primaryField: name
+  fields:
+    - id: lastUsedAt
+      name: Last used at
+      type: date
+      required: true
+      settings:
+        includeTime: true
+    - id: applicationId
+      name: Application
+      type: relationship
+      required: true
+      settings:
+        type: hasOne
+        foreignModel: Application
+    - id: name
+      name: Name
+      type: text
+      required: true
+    - id: token
+      name: Token
+      type: text
+      required: true
+    - id: userId
+      name: User
+      type: relationship
+      required: true
+      settings:
+        type: hasOne
+        foreignModel: User
+    - id: activeId
+      name: Active
+      type: singleSelect
+      required: true
+      settings:
+        expanded: true
+        options:
+          - id: YES
+            name: Yes
+            backgroundColor: rgb(0, 200, 117)
+            color: white
+          - id: NO
+            name: No
+            backgroundColor: rgb(226, 68, 92)
+            color: white
+    - id: browserName
+      name: Browser name
+      type: text
+      required: true
+    - id: browserVersion
+      name: Browser version
+      type: text
+      required: true
+    - id: browserOs
+      name: Browser OS
+      type: text
+      required: true
+    - id: browserFullVersion
+      name: Browser full version
+      type: text
+      required: true
+    - id: registrationId
+      name: Registration
+      type: text
+      required: true
+    - id: used
+      name: Used
+      type: boolean
+      required: true
+    - id: createdAt
+      name: Aangemaakt op
+      type: date
+      required: true
+      settings:
+        includeTime: true
+    - id: id
+      name: ID
+      type: id
+      required: true
+tablePage:
+  views:
+    default:
+      query: ORDER BY createdAt DESC
+---
+apiVersion: v1
+kind: ModelDetailPage
+spec:
+  id: User
+  protected:
+    query: ORDER BY createdAt DESC
+  layout:
+    - type: Row
+      children:
+        - type: Col
+          className: "col-md-8"
+          children:
+            - type: Tabs
+              children:
+                - type: RecordDetailTable
+                  title: Basisgegevens
+    - type: Row
+      children:
+        - type: Col
+          className: "col-md-8"
+          children:
+            - type: Tabs
+              children:
+                - title: Groups
+                  type: ComingSoon
+                - title: Recent Logins
+                  type: ComingSoon
+                - title: Sessions
+                  type: UserSessions
+                - title: User Data
+                  type: ComingSoon
+---
+apiVersion: v1
+kind: ModelDetailPage
+spec:
+  id: Application
+  layout:
+    - type: RecordDetailTable
+---
+apiVersion: v1
+kind: ModelDetailPage
+spec:
+  id: Group
+  layout:
+    - type: RecordDetailTable
+---
+apiVersion: v1
+kind: ModelDetailPage
+spec:
+  id: Role
+  layout:
+    - type: RecordDetailTable
+---
+apiVersion: v1
+kind: ModelDetailPage
+spec:
+  id: Session
+  protected:
+    query: ORDER BY lastUsedAt DESC
+  layout:
+    - type: RecordDetailTable
+---
+apiVersion: v1
+kind: Model
+spec:
+  id: Group
+  name: Group
+  plural: Groups
+  identifierKey: grp
+  collectionKey: groups
+  tableName: groups
+  clearable: true
+  primaryField: name
+  fields:
+    - id: name
+      name: Name
+      type: text
+    - id: id
+      name: ID
+      type: id
+ 
+---
+apiVersion: v1
+kind: Model
+spec:
+  id: Role
+  name: Role
+  plural: Roles
+  identifierKey: rol
+  collectionKey: roles
+  tableName: roles
+  clearable: true
+  primaryField: name
+  fields:
+    - id: name
+      name: Name
+      type: text
+    - id: id
+      name: ID
+      type: id
+---
+apiVersion: v1
+kind: Component
+spec:
+  id: UserSessions
+  type: HasMany
+  name: Sessies
+  modelId: User
+  foreignModel: Session
+  query: WHERE userId = ? ORDER BY createdAt DESC
+  bindings:
+    - ${source.id}
