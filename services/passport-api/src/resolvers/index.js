@@ -60,7 +60,8 @@ module.exports = {
         viewer: () => ({})
     },
     Application: {
-        clientId: source => source.id
+        clientId: source => source.id,
+        clientSecret: source => null
     },
     Viewer: {
         applications: withMiddleware(

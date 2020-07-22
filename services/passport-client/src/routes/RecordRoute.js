@@ -99,21 +99,23 @@ class TableRoute extends React.Component {
             >
                 <Content>
                     <div className={"container-fluid"}>
-                        <ModelDetailPage
-                            components={{
-                                ComingSoon: () => (
-                                    <div>
-                                        coming soon
-                                    </div>
-                                )
-                            }}
-                            modelDetailPage={this.props.modelDetailPage.toJS()}
-                            schema={schema}
-                            data={this.state.data}
-                            modelId={this.props.modelId}
-                            recordId={this.props.recordId}
-                            onRequest={this.handleRequest}
-                        />
+                        <div className={"row"}>
+                            <ModelDetailPage
+                                components={{
+                                    ComingSoon: () => (
+                                        <div>
+                                            coming soon
+                                        </div>
+                                    )
+                                }}
+                                modelDetailPage={this.props.modelDetailPage.toJS()}
+                                schema={schema}
+                                data={this.state.data}
+                                modelId={this.props.modelId}
+                                recordId={this.props.recordId}
+                                onRequest={this.handleRequest}
+                            />
+                        </div>
                     </div>
                 </Content>
                 <div

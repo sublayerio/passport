@@ -23,6 +23,13 @@ spec:
 apiVersion: v1
 kind: NavItem
 spec:
+  id: login
+  type: ModelListPage
+  modelId: Login
+---
+apiVersion: v1
+kind: NavItem
+spec:
   id: session
   type: ModelListPage
   modelId: Session
@@ -86,6 +93,12 @@ spec:
       name: Last name
       type: text
       required: true
+    - id: lastActiveAt
+      name: Laatst actief op
+      type: date
+      required: true
+      settings:
+        includeTime: true
     - id: createdAt
       name: Aangemaakt op
       type: date
@@ -186,10 +199,85 @@ spec:
       name: ID
       type: id
       required: true
-tablePage:
-  views:
-    default:
-      query: ORDER BY createdAt DESC
+---
+apiVersion: v1
+kind: Model
+spec:
+  id: Login
+  name: Login
+  plural: Logins
+  identifierKey: log
+  collectionKey: logins
+  tableName: logins
+  clearable: true
+  primaryField: name
+  fields:
+    - id: createdAt
+      name: Created at
+      type: date
+      required: true
+      settings:
+        includeTime: true
+    - id: applicationId
+      name: Application
+      type: relationship
+      required: true
+      settings:
+        type: hasOne
+        foreignModel: Application
+    - id: name
+      name: Name
+      type: text
+      required: true
+    - id: token
+      name: Token
+      type: text
+      required: true
+    - id: remoteAddress
+      name: IP address
+      type: text
+    - id: userId
+      name: User
+      type: relationship
+      required: true
+      settings:
+        type: hasOne
+        foreignModel: User
+    - id: state
+      name: State
+      type: singleSelect
+      required: true
+      settings:
+        expanded: true
+        options:
+          - id: OPEN
+            name: Open
+            backgroundColor: rgb(226, 68, 92)
+            color: white
+          - id: VERIFIED
+            name: Verified
+            backgroundColor: rgb(0, 200, 117)
+            color: white
+    - id: browserName
+      name: Browser name
+      type: text
+      required: true
+    - id: browserVersion
+      name: Browser version
+      type: text
+      required: true
+    - id: browserOs
+      name: Browser OS
+      type: text
+      required: true
+    - id: browserFullVersion
+      name: Browser full version
+      type: text
+      required: true
+    - id: id
+      name: ID
+      type: id
+      required: true
 ---
 apiVersion: v1
 kind: ModelDetailPage
@@ -206,7 +294,7 @@ spec:
             - type: Tabs
               children:
                 - type: RecordDetailTable
-                  title: Basisgegevens
+                  title: Details
     - type: Row
       children:
         - type: Col
@@ -217,7 +305,7 @@ spec:
                 - title: Groups
                   type: ComingSoon
                 - title: Recent Logins
-                  type: ComingSoon
+                  type: UserLogins
                 - title: Sessions
                   type: UserSessions
                 - title: User Data
@@ -250,6 +338,15 @@ spec:
   id: Session
   protected:
     query: ORDER BY lastUsedAt DESC
+  layout:
+    - type: RecordDetailTable
+---
+apiVersion: v1
+kind: ModelDetailPage
+spec:
+  id: Login
+  protected:
+    query: ORDER BY createdAt DESC
   layout:
     - type: RecordDetailTable
 ---
@@ -291,6 +388,19 @@ spec:
     - id: id
       name: ID
       type: id
+---
+apiVersion: v1
+kind: Component
+spec:
+  id: UserLogins
+  type: HasMany
+  name: Logins
+  modelId: User
+  foreignModel: Login
+  query: WHERE userId = ? ORDER BY createdAt DESC
+  bindings:
+    - ${source.id}
+
 ---
 apiVersion: v1
 kind: Component

@@ -20,7 +20,6 @@ const Brand = ({ imageUrl, companyName }) => (
             width: 75px;
             height: 75px;
             overflow: hidden;
-            box-shadow: 0 0 0 1px rgba(0,0,0,.09), 0 1px 0 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.1);
         `}
         title={companyName}
     >
@@ -130,24 +129,6 @@ export default class SignInForm extends React.Component {
                         >
                             {submitting ? <Spinner /> : buttonLabel}
                         </Button>
-                    </div>
-                    <div
-                        className={css`
-                                opacity: 0.5;
-                                margin-top: 16px;
-                                margin-bottom: 30px;
-                                font-size: 14px;
-                            `}
-                    >
-                        {t('SignInForm.toContinueDescription', {
-                            bindings: {
-                                applicationTitle: window._env_.REACT_APP_TITLE,
-                                companyName,
-                                privacyPolicyUrl,
-                                termsOfServiceUrl
-                            },
-                            markdown: true
-                        })}
                     </div>
                 </form>
             </div>

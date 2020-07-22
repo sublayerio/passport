@@ -1,4 +1,5 @@
 const moment = require('moment')
+const uuid = require('uuid')
 const browserInfo = require('browser-info')
 const assign = require('lodash/assign')
 const generateCode = require('../services/generateCode')
@@ -7,17 +8,34 @@ const login = require('../mails/login')
 const globalId = require('./globalId')
 const getApplication = require('./getApplication')
 
-module.exports = ctx => async ({clientId, email}) => {
+module.exports = ctx => async ({ clientId, email }) => {
 
     const application = await getApplication(ctx)({
         id: clientId
     })
 
-    const createSession = async ({name, userId, activeId, browserName, browserVersion, browserFullVersion, browserOs}) => {
+    const createSession = async ({ name, userId, activeId, browserName, browserVersion, browserFullVersion, browserOs }) => {
 
-        const sessionId = globalId.generate('ses')
-        const registrationId = globalId.generate('reg')
-        const token = globalId.generate('tok')
+        const sessionId = uuid.v4()
+        const registrationId = uuid.v4()
+        const token = uuid.v4()
+
+        const loginId = uuid.v4()
+
+        await ctx.connection.query('INSERT INTO logins SET ?', {
+            id: loginId,
+            applicationId: clientId,
+            name,
+            userId,
+            browserName,
+            browserVersion,
+            browserFullVersion,
+            browserOs,
+            token,
+            remoteAddress: ctx.req.clientIp,
+            state: 'OPEN',
+            createdAt: moment().toDate(),
+        })
 
         await ctx.connection.query('INSERT INTO sessions SET ?', {
             id: sessionId,
@@ -86,17 +104,19 @@ module.exports = ctx => async ({clientId, email}) => {
         sessionId
     ])
 
+    const html = login({
+        companyName: application.name,
+        brandImageUrl: application.brandImageUrl,
+        email: email,
+        code: code,
+        url: ctx.env.CLIENT_URL,
+        token: session.token
+    })
+
     await mail(ctx).send({
         to: email,
-        subject: `Log in to ${application.name}`,
-        html: login({
-            companyName: application.name,
-            brandImageUrl: application.brandImageUrl,
-            email: email,
-            code: code,
-            url: ctx.env.CLIENT_URL,
-            token: session.token
-        })
+        subject: `Inloggen bij ${application.name}`,
+        html
     })
 
     return {

@@ -11,11 +11,11 @@ module.exports = ctx => async ({id, applicationId}) => {
 
     assert(!session.used, 'SESSION_ALREADY_USED: Session already used')
 
-    await ctx.connection.query('UPDATE sessions SET used = ? WHERE id = ? AND applicationId = ?', [
-        1,
-        id,
-        applicationId
-    ])
+    // await ctx.connection.query('UPDATE sessions SET used = ? WHERE id = ? AND applicationId = ?', [
+    //     1,
+    //     id,
+    //     applicationId
+    // ])
 
     return session
 }
