@@ -70,7 +70,7 @@ export default class ApplicationsRoute extends React.Component {
                         Register new application
                     </Button>
                 </div>
-                <h1>Registered applications</h1>
+                <h1>Manage applications</h1>
                 <p
                     className={css`
                         opacity: 0.5;

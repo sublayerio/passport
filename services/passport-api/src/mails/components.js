@@ -3,7 +3,7 @@ module.exports = {
     <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100% !important;">
     <tr>
         <td align="center">
-            <table style="border:1px solid #eaeaea;border-radius:5px;margin:40px 0;" width="600" border="0"
+            <table style="border:1px solid transparent;border-radius:5px;margin:0px 0;" width="600" border="0"
                    cellspacing="0" cellpadding="40">
                 <tr>
                     <td align="center">
@@ -40,7 +40,7 @@ module.exports = {
        style="width:100% !important;">
     <tr>
         <td align="left">
-            <h1 style="font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Lato&quot;, &quot;Oxygen&quot;, &quot;Ubuntu&quot;, &quot;Cantarell&quot;, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;font-size:32px;font-weight:700;margin:30px 0;padding:0;">
+            <h1 style="font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Lato&quot;, &quot;Oxygen&quot;, &quot;Ubuntu&quot;, &quot;Cantarell&quot;, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;font-size:32px;font-weight:700;margin:20px 0;padding:0;">
                 ${title}
             </h1>
         </td>
@@ -48,55 +48,35 @@ module.exports = {
 </table>
     `,
     paragraph: (props, children) => `
-    <p style="font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Lato&quot;, &quot;Oxygen&quot;, &quot;Ubuntu&quot;, &quot;Cantarell&quot;, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;font-size:16px;line-height:32px;font-weight:300;">${children}</p>
+    <p style="font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Lato&quot;, &quot;Oxygen&quot;, &quot;Ubuntu&quot;, &quot;Cantarell&quot;, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;font-size:14px;line-height:28px;font-weight:300;">${children}</p>
     `,
     button: ({ url, title }) => `
     <table width="100%" border="0" cellspacing="0" cellpadding="0"
        style="width:100% !important;">
     <tr>
-        <td align="center">
+        <td>
             <div>
-                <!--[if mso]>
-                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
-                             xmlns:w="urn:schemas-microsoft-com:office:word"
-                             href="${url}"
-                             style="height:50px;width:200px;v-text-anchor:middle;"
-                             arcsize="10%" stroke="f" fillcolor="#0022fd">
-                    <w:anchorlock/>
-                    <center>
-                <![endif]-->
-                <a href="${url}"
-                   target="_blank"
-                   style="background-color:#0022fd;color:#ffffff;display:block;font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Lato&quot;, &quot;Oxygen&quot;, &quot;Ubuntu&quot;, &quot;Cantarell&quot;, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;font-size:16px;font-weight:500;line-height:50px;text-align:center;text-decoration:none;-webkit-text-size-adjust:none;">${title}</a>
-                <!--[if mso]>
-                </center>
-                </v:roundrect>
-                <![endif]-->
+            <a href="${url}" style="text-decoration:none;display:inline-block;background-color:${process.env.COMPANY_PRIMARY_COLOR};border-radius:7px;width:auto;padding-top:10px;padding-bottom:10px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;text-align:center;word-break:keep-all;line-height:inherit;color:#fff!important;border:1px solid ${process.env.COMPANY_PRIMARY_COLOR}" target="_blank">             
+                <span style="padding-left:30px;padding-right:30px;font-size:18px;display:inline-block;line-height:inherit;color:#fff!important">
+                    <span style="font-size:16px;line-height:2;color:#fff!important"><span style="font-size:18px;line-height:36px;color:#fff!important"><strong style="line-height:inherit">${title}</strong></span></span>
+                </span>
+            </a>
             </div>
         </td>
     </tr>
 </table>
-<br/>
-<p style="font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Lato&quot;, &quot;Oxygen&quot;, &quot;Ubuntu&quot;, &quot;Cantarell&quot;, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;font-size:14px;line-height:24px;">
-    <a href="${url}"
-       target="_blank" 
-       style="color:#0022fd;text-decoration:none;">
-       Of kopieer en plak deze URL in je browser: <br/>
-        ${url}
-    </a>
-</p>
     `,
-    image: ({ src, width, height }) => `
+    image: ({ src, width, height, companyName }) => `
     <table width="100%" border="0" cellspacing="0" cellpadding="0"
        style="width:100% !important;">
     <tr>
-        <td align="center">
+        <td>
             <div>
                 <img
-                    src=${src}
-                    width=${width} 
-                    height=${height}
-                    alt="Sublayer"
+                    src="${src}"
+                    width="${width}" 
+                    height="${height}"
+                    alt="${companyName}"
                 />
             </div>
         </td>

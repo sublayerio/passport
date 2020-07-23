@@ -6,13 +6,26 @@ type Mutation {
     authenticate(code: String!): String
     createRegistration(clientId: ID!, email: String!): Registration
     verifyRegistration(id: ID!): Session
-    confirmRegistration(token: ID!): Boolean
+    confirmRegistration(token: ID!): ConfirmRegistrationPayload!
     createApplication(input: CreateApplicationInput!): Application
     updateApplication(id: ID!, input: UpdateApplicationInput!): Application
     removeApplication(id: ID!): Boolean
     revokeAccess(applicationId: ID!): Boolean
     updateUser(id: ID!, input: UpdateUserInput!): User
 }
+
+type ConfirmRegistrationPayload {
+    application: Application
+    email: String
+    status: RegistrationConfirmationStatus!
+}
+
+enum RegistrationConfirmationStatus {
+    TOKEN_NOT_FOUND
+    LOGIN_EXPIRED
+    ALREADY_VERIFIED
+    VERIFIED
+} 
 
 type Query {
     viewer: Viewer!

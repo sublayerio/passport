@@ -1,6 +1,6 @@
 import React from 'react'
-import {css} from 'emotion'
-import {connect} from 'react-redux'
+import { css } from 'emotion'
+import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import SignInForm from '../components/SignInForm'
 import VerifyingSession from '../components/VerifyingSession'
@@ -85,7 +85,7 @@ class SignInRoute extends React.Component {
 
     verifyRegistration = async () => {
 
-        const {registrationId} = this.state
+        const { registrationId } = this.state
 
         const response = await api.request({
             method: 'POST',
@@ -206,7 +206,7 @@ class SignInRoute extends React.Component {
 
     handleSignIn = async (e) => {
 
-        const {email} = this.state
+        const { email } = this.state
 
         e.preventDefault()
 

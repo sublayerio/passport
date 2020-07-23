@@ -3,6 +3,10 @@ const pkg = require('../package.json')
 const dotenv = require('dotenv')
 dotenv.config()
 
+const moment = require('moment/moment')
+
+moment.locale('nl')
+
 const PORT = process.env.PORT || 3000
 const HOST = process.env.HOST || '0.0.0.0'
 

@@ -1,8 +1,12 @@
-import {fromJS} from 'immutable'
+import { fromJS } from 'immutable'
 
 export default (state, action) => {
 
     switch (action.type) {
+
+        case 'SET_STATE': {
+            return state.merge(fromJS(action.payload))
+        }
 
         case 'SET_SESSION': {
             return state.set('session', action.payload)

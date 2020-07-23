@@ -1,12 +1,12 @@
 {
   "name": "passport-client",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@cmds/icons": "^0.2.0",
-    "@cmds/sidebar": "^0.4.0",
-    "@sublayer/ui": "^1.0.4",
+    "@sublayer/ui": "^1.1.4",
     "axios": "^0.18.0",
+    "bootstrap-4-grid": "^3.4.0",
     "emotion": "^10.0.9",
     "history": "^4.9.0",
     "immutable": "^4.0.0-rc.12",

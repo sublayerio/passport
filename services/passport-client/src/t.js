@@ -42,9 +42,14 @@ const translations = {
         },
         Activate: {
             title: 'Aan het bevestigen',
-            confirmedTitle: 'E-mailadres bevestigd',
-            confirmedDescription: 'We hebben kunnen verifiëren dat jij het bent. Je mag nu dit venster sluiten en terug gaan naar de pagina waar je zojuist bent ingelogd.'
-        }
+            alreadyVerifiedTitle: 'Je bent reeds ingelogd bij',
+            confirmedTitle: 'Je bent nu ingelogd bij',
+            confirmedDescription: 'Ga terug naar je oorspronkelijke pagina. Je kunt dit venster nu sluiten.',
+            loginExpiredTitle: 'Magic link verlopen',
+            loginExpiredDescription: 'Vraag opnieuw een magic link aan'
+        },
+        'Uh oh! Something went wrong': 'Oh Oh! Er is iets fout gegaan',
+        'We couldn\'t find the resource you\'re looking for.': 'We kunnen de bron die u zoekt niet vinden.'
     }
 }
 
