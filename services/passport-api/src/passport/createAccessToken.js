@@ -1,5 +1,5 @@
 const assert = require('../functions/assert')
-const jwt = require('./jwt')
+const createAccessToken = require('./utils/createAccessToken')
 
 module.exports = ctx => async ({ refresh_token }) => {
 
@@ -25,16 +25,7 @@ module.exports = ctx => async ({ refresh_token }) => {
         session.userId
     ])
 
-    const payload = {
-        sub: user.id,
-        type: 'user',
-        name: user.name ? user.name : user.email,
-        email: user.email
-    }
-
-    const access_token = await jwt.sign(payload, {
-        expiresIn: process.env.JWT_EXPIRES_IN
-    })
+    const access_token = await createAccessToken(ctx)(user)
 
     return {
         access_token

@@ -31,7 +31,7 @@ class SignInRoute extends React.Component {
         const clientId = this.getClientId()
 
         if (clientId === window._env_.REACT_APP_CLIENT_ID && this.props.session) {
-            this.props.history.push('/dashboard')
+            this.props.history.push('/explorer/Application')
             return
         }
 

@@ -302,14 +302,16 @@ spec:
           children:
             - type: Tabs
               children:
-                - title: Groups
+                - title: User Data
                   type: ComingSoon
+                - title: Groups
+                  type: UserGroups
+                - title: Roles
+                  type: UserRoles
                 - title: Recent Logins
                   type: UserLogins
                 - title: Sessions
                   type: UserSessions
-                - title: User Data
-                  type: ComingSoon
 ---
 apiVersion: v1
 kind: ModelDetailPage
@@ -400,16 +402,39 @@ spec:
   query: WHERE userId = ? ORDER BY createdAt DESC
   bindings:
     - ${source.id}
-
 ---
 apiVersion: v1
 kind: Component
 spec:
   id: UserSessions
   type: HasMany
-  name: Sessies
+  name: Sessions
   modelId: User
   foreignModel: Session
   query: WHERE userId = ? ORDER BY createdAt DESC
+  bindings:
+    - ${source.id}
+---
+apiVersion: v1
+kind: Component
+spec:
+  id: UserGroups
+  type: HasMany
+  name: Groups
+  modelId: User
+  foreignModel: Group
+  query: LEFT JOIN users_groups ON groups.id = users_groups.groupId WHERE users_groups.userId = ?
+  bindings:
+    - ${source.id}
+---
+apiVersion: v1
+kind: Component
+spec:
+  id: UserRoles
+  type: HasMany
+  name: Roles
+  modelId: User
+  foreignModel: Role
+  query: LEFT JOIN groups_roles ON roles.id = groups_roles.roleId LEFT JOIN users_groups ON groups_roles.groupId = users_groups.groupId WHERE users_groups.userId = ?
   bindings:
     - ${source.id}

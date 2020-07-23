@@ -29,7 +29,7 @@ const createContext = async () => {
         db,
         schema,
         destroy: async () => {
-            await db.destroy()   
+            await db.destroy()
         }
     }
 }
@@ -43,15 +43,34 @@ const getComponent = require('./sdk/model/getComponent')
 const createRefreshToken = require('./passport/createRefreshToken')
 const createAccessToken = require('./passport/createAccessToken')
 
+const passport = require('@sublayer/passport-sdk')
+// const auth = require('@sublayer/passport-sdk/middleware')
+
 const app = express()
 
-mailExamples(app)
+console.log({
+    origin: process.env.CLIENT_URL,
+    credentials: true
+})
 
-app.use(cors())
+app.use(
+    cors({
+        origin: process.env.CLIENT_URL,
+        credentials: true
+    })
+)
+
+mailExamples(app)
 
 app.use(requestId.mw())
 
 app.use(morgan('tiny'))
+
+app.use('/v0',
+    passport({
+        roles: ['passport.auth']
+    })
+)
 
 app.post("/v0/refresh-token/create", bodyParser.json(), handle(createRefreshToken))
 app.post("/v0/access-token/create", bodyParser.json(), handle(createAccessToken))
@@ -73,6 +92,6 @@ app.get('/', (req, res) => {
 
 })
 
-app.use('/v0', middleware.cors, middleware.context, middleware.auth, middleware.graphql)
+app.use('/v0', middleware.context, middleware.auth, middleware.graphql)
 
 module.exports = app

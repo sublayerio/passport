@@ -5,7 +5,6 @@ const assign = require('lodash/assign')
 const generateCode = require('../services/generateCode')
 const mail = require('../services/mail')
 const login = require('../mails/login')
-const globalId = require('./globalId')
 const getApplication = require('./getApplication')
 
 module.exports = ctx => async ({ clientId, email }) => {
@@ -67,7 +66,7 @@ module.exports = ctx => async ({ clientId, email }) => {
 
     if (!user) {
 
-        userId = globalId.generate('usr')
+        userId = uuid.v4()
 
         await ctx.connection.query('INSERT INTO users SET ?', {
             id: userId,

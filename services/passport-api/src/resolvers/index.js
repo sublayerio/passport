@@ -2,16 +2,10 @@ const createRegistration = require('../functions/createRegistration')
 const verifyRegistration = require('../functions/verifyRegistration')
 const confirmRegistration = require('../functions/confirmRegistration')
 const getApplication = require('../functions/getApplication')
-const getSession = require('../functions/getSession')
 const getSessionForApplication = require('../functions/getSessionForApplication')
 const getUser = require('../functions/getUser')
-const createApplication = require('../functions/createApplication')
-const updateApplication = require('../functions/updateApplication')
 const getApplications = require('../functions/getApplications')
 const updateUser = require('../functions/updateUser')
-const removeApplication = require('../functions/removeApplication')
-const getAuthorizations = require('../functions/getAuthorizations')
-const revokeAccess = require('../functions/revokeAccess')
 const assert = require('../functions/assert')
 const authenticate = require('../functions/authenticate')
 
@@ -36,21 +30,6 @@ module.exports = {
         createRegistration: (source, {clientId, email}, ctx) => createRegistration(ctx)({clientId, email}),
         verifyRegistration: (source, {id}, ctx) => verifyRegistration(ctx)({id}),
         confirmRegistration: (source, {token}, ctx) => confirmRegistration(ctx)({token}),
-        createApplication: withMiddleware(
-            auth,
-            (source, {input}, ctx) => createApplication(ctx)({
-                input,
-                userId: ctx.userId
-            })
-        ),
-        updateApplication: withMiddleware(
-            auth,
-            (source, {id, input}, ctx) => updateApplication(ctx)({id, input})
-        ),
-        removeApplication: withMiddleware(
-            auth,
-            (source, {id}, ctx) => removeApplication(ctx)({id})
-        ),
         updateUser: withMiddleware(
             auth,
             (source, {id, input}, ctx) => updateUser(ctx)({id, input})
@@ -61,7 +40,6 @@ module.exports = {
     },
     Application: {
         clientId: source => source.id,
-        clientSecret: source => null
     },
     Viewer: {
         applications: withMiddleware(

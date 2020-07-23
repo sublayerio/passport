@@ -63,6 +63,9 @@ const addRecords = (state, { modelId, records }) => {
 };
 
 const getRecordsForRelationship = ctx => async ({ modelId, whereIn }) => {
+    if (!whereIn.length) {
+        return []
+    }
     const model = getResource(ctx)("Model", modelId);
     const rows = await ctx.db.query(
         `SELECT * FROM ${model.tableName} WHERE id IN (?)`,

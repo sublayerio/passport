@@ -71,21 +71,6 @@ class Layout extends React.Component {
                         />
                         <MenuContainer>
                             <Menu>
-                                <MenuItem
-                                    theme={theme}
-                                    icon={icons.home}
-                                    title={'Dashboard'}
-                                    active={window.location.href.indexOf('/dashboard') !== -1}
-                                    onClick={() => this.props.history.push('/dashboard')}
-                                />
-                                <MenuItem
-                                    theme={theme}
-                                    icon={plug}
-                                    title={'Manage applications'}
-                                    active={window.location.href.indexOf('/applications') !== -1}
-                                    onClick={() => this.props.history.push('/applications')}
-                                />
-                                <MenuSeparator theme={theme} />
                                 {this.props.navItems.toJS().map(navItem => {
                                     const Component = navItemTypes[navItem.type];
 
@@ -94,14 +79,6 @@ class Layout extends React.Component {
                                     return <Component theme={theme} {...navItem} />;
                                 })}
                                 <MenuSeparator large={true} theme={theme} />
-                                <MenuItem
-                                    theme={theme}
-                                    icon={icons.userCircle}
-                                    small={true}
-                                    title={'Profile'}
-                                    active={window.location.href.indexOf('/profile') !== -1}
-                                    onClick={() => this.props.history.push('/profile')}
-                                />
                                 <MenuItem
                                     theme={theme}
                                     icon={icons.signout}

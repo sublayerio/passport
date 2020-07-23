@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@cmds/icons": "^0.2.0",
+    "@sublayer/passport-components": "^1.0.2",
     "@sublayer/ui": "^1.1.4",
     "axios": "^0.18.0",
     "bootstrap-4-grid": "^3.4.0",

@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 const assert = require('../functions/assert')
-const jwt = require('./jwt')
+const createAccessToken = require('./utils/createAccessToken')
 
 module.exports = ctx => async ({ code }) => {
 
@@ -24,16 +24,7 @@ module.exports = ctx => async ({ code }) => {
         session.userId
     ])
 
-    const payload = {
-        sub: user.id,
-        type: 'user',
-        name: user.name ? user.name : user.email,
-        email: user.email
-    }
-
-    const access_token = await jwt.sign(payload, {
-        expiresIn: process.env.JWT_EXPIRES_IN
-    })
+    const access_token = await createAccessToken(ctx)(user)
 
     return {
         refresh_token,

@@ -67,7 +67,9 @@ const addRecords = (state, { modelId, records }) => {
 };
 
 const getRecordsForRelationship = ctx => async ({ modelId, whereIn }) => {
-    console.log('getRecordsForRelationship', { modelId, whereIn })
+    if (!whereIn.length) {
+        return []
+    }
     const model = getResource(ctx)("Model", modelId);
     const rows = await ctx.db.query(
         `SELECT * FROM ${model.tableName} WHERE id IN (?)`,
@@ -79,13 +81,15 @@ const getRecordsForRelationship = ctx => async ({ modelId, whereIn }) => {
 
 module.exports = ctx => async params => {
     let state = {};
+    state[params.modelId + 'Datas'] = {}
+    state[params.modelId] = []
 
     const model = getResource(ctx)("Model", params.modelId);
     const modelDetailPage = getResource(ctx)("ModelDetailPage", params.modelId);
 
     const extendQuery = get(modelDetailPage, 'protected.query')
 
-    const rows = await ctx.db.query(`SELECT * FROM ${model.tableName} ${extendQuery} LIMIT 1000`);
+    const rows = await ctx.db.query(`SELECT * FROM ${model.tableName}${extendQuery ? ` ${extendQuery}` : ''} LIMIT 1000`);
     const records = transformMany(model, rows);
 
     // Add records

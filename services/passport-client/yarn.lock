@@ -1088,10 +1088,19 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.4.4.tgz#11d5db19bd178936ec89cd84519c4de439574398"
   integrity sha512-1oO6+dN5kdIA3sKPZhRGJTfGVP4SWV6KqlMOwry4J3HfyD68sl/3KmG7DeYUzvN+RbhXDnv/D8vNNB8168tAMg==
 
-"@sublayer/ui@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@sublayer/ui/-/ui-1.1.0.tgz#8c44414bfd88479abcf357e081124efbdee9d7eb"
-  integrity sha512-Lkbg53P9E1wK0ovnmYWX2o1udndhrv0LHUAbFbnlV7uf6l2632igrgM3DpY9QUJuh4tRAMpOFPaU+ZxgONyDnA==
+"@sublayer/passport-components@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@sublayer/passport-components/-/passport-components-1.0.1.tgz#8ee390d0b0a8aa405624159cba3ca4c394644eb6"
+  integrity sha512-uK54y62veWU2eKUK1ZIRkFgnrLYsFKnHUCJtcbYaLdfivByN00f5PwlsOZzZK0P2PwYCFUpLehZWPemiyquxkw==
+  dependencies:
+    axios "^0.19.2"
+    debug "^4.1.1"
+    jwt-decode "^2.2.0"
+
+"@sublayer/ui@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@sublayer/ui/-/ui-1.1.4.tgz#8a53bc68e5a1418ce5c1fa1af2bd14e87a8c2344"
+  integrity sha512-3A2Kp2ufkuOmRGhZeypivYMoQu7I9M8J8Ndn6DKv4mm5MebIljMHGXBE/Lt6XynFzYewBDHayJE+0tpBi/ZvuQ==
   dependencies:
     "@cmds/button" "^0.4.0"
     "@cmds/switch" "^0.2.0"
@@ -3417,7 +3426,7 @@ debug@^3.1.0, debug@^3.2.5, debug@^3.2.6:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.1, debug@^4.1.0:
+debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
   integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
@@ -6486,6 +6495,11 @@ jsx-ast-utils@^2.0.1:
   integrity sha1-6AGxs5mF4g//yHtA43SAgOLcrH8=
   dependencies:
     array-includes "^3.0.3"
+
+jwt-decode@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-2.2.0.tgz#7d86bd56679f58ce6a84704a657dd392bba81a79"
+  integrity sha1-fYa9VmefWM5qhHBKZX3TkruoGnk=
 
 killable@^1.0.0:
   version "1.0.1"

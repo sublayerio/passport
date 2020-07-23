@@ -7,10 +7,6 @@ type Mutation {
     createRegistration(clientId: ID!, email: String!): Registration
     verifyRegistration(id: ID!): Session
     confirmRegistration(token: ID!): ConfirmRegistrationPayload!
-    createApplication(input: CreateApplicationInput!): Application
-    updateApplication(id: ID!, input: UpdateApplicationInput!): Application
-    removeApplication(id: ID!): Boolean
-    revokeAccess(applicationId: ID!): Boolean
     updateUser(id: ID!, input: UpdateUserInput!): User
 }
 
@@ -74,7 +70,6 @@ type Application {
     supportEmail: String
     brandImageUrl: String
     clientId: String
-    clientSecret: String
     createdAt: DateTime
 }
 
@@ -90,20 +85,4 @@ type Client {
 input UpdateUserInput {
     firstName: String
     lastName: String
-}
-
-input CreateApplicationInput {
-    name: String!
-    privacyPolicyUrl: String
-    termsOfServiceUrl: String
-    supportEmail: String
-    brandImageUrl: String
-}
-
-input UpdateApplicationInput {
-    name: String!
-    privacyPolicyUrl: String
-    termsOfServiceUrl: String
-    supportEmail: String
-    brandImageUrl: String
 }

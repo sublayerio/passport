@@ -9,7 +9,6 @@ const extractTokenFromHeaders = (headers) => {
     const parts = authorization.split(' ')
     if (parts.length !== 2) return null
     if (parts[0] !== 'Bearer') return null
-    // if (globalId.isOfType('key', parts[1]) === false) return null
     return parts[1]
 }
 
