@@ -8,8 +8,6 @@ const mailExamples = require('./routes/mailExamples')
 const pkg = require('../package.json')
 const bodyParser = require('body-parser')
 
-console.log('COMPANY_PRIMARY_COLOR', process.env.COMPANY_PRIMARY_COLOR)
-
 const createConnection = require('./database/createConnection')
 const createSchema = require("./sdk/schema/createSchema")({
     configPath: path.join(__dirname, 'schema.yaml')
