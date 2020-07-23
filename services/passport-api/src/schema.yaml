@@ -3,8 +3,6 @@ kind: Application
 spec:
   id: 1
   name: Sublayer Passport
-  description: Version v1.0.0
-  logoUrl: /klasse@2.png
 ---
 apiVersion: v1
 kind: NavItem
@@ -423,7 +421,7 @@ spec:
   name: Groups
   modelId: User
   foreignModel: Group
-  query: LEFT JOIN users_groups ON groups.id = users_groups.groupId WHERE users_groups.userId = ?
+  query: LEFT JOIN `users_groups` ON `groups`.`id` = `users_groups`.`groupId` WHERE `users_groups`.`userId` = ?
   bindings:
     - ${source.id}
 ---
@@ -435,6 +433,6 @@ spec:
   name: Roles
   modelId: User
   foreignModel: Role
-  query: LEFT JOIN groups_roles ON roles.id = groups_roles.roleId LEFT JOIN users_groups ON groups_roles.groupId = users_groups.groupId WHERE users_groups.userId = ?
+  query: LEFT JOIN `groups_roles` ON `roles`.`id` = `groups_roles`.`roleId` LEFT JOIN `users_groups` ON `groups_roles`.`groupId` = `users_groups`.`groupId` WHERE `users_groups`.`userId` = ?
   bindings:
     - ${source.id}
