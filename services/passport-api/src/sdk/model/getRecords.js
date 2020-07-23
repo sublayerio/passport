@@ -72,7 +72,7 @@ const getRecordsForRelationship = ctx => async ({ modelId, whereIn }) => {
     }
     const model = getResource(ctx)("Model", modelId);
     const rows = await ctx.db.query(
-        `SELECT * FROM ${model.tableName} WHERE id IN (?)`,
+        `SELECT * FROM \`${model.tableName}\` WHERE id IN (?)`,
         [whereIn]
     );
     const records = transformMany(model, rows);
@@ -89,7 +89,7 @@ module.exports = ctx => async params => {
 
     const extendQuery = get(modelDetailPage, 'protected.query')
 
-    const rows = await ctx.db.query(`SELECT * FROM ${model.tableName}${extendQuery ? ` ${extendQuery}` : ''} LIMIT 1000`);
+    const rows = await ctx.db.query(`SELECT * FROM \`${model.tableName}\`${extendQuery ? ` ${extendQuery}` : ''} LIMIT 1000`);
     const records = transformMany(model, rows);
 
     // Add records

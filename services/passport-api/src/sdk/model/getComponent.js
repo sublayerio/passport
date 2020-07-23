@@ -69,7 +69,7 @@ const getRecordsForRelationship = ctx => async ({ modelId, whereIn }) => {
   }
   const model = getResource(ctx)("Model", modelId);
   const rows = await ctx.db.query(
-    `SELECT * FROM ${model.tableName} WHERE id IN (?)`,
+    `SELECT * FROM \`${model.tableName}\` WHERE id IN (?)`,
     [whereIn]
   );
   const records = transformMany(model, rows);
@@ -84,7 +84,7 @@ module.exports = ctx => async ({ componentId, recordId }) => {
   const foreignModel = getResource(ctx)("Model", foreignModelId);
 
   const [row] = await ctx.db.query(
-    `SELECT * FROM ${model.tableName} WHERE id = ? LIMIT 1`,
+    `SELECT * FROM \`${model.tableName}\` WHERE id = ? LIMIT 1`,
     [recordId]
   );
 
@@ -92,7 +92,7 @@ module.exports = ctx => async ({ componentId, recordId }) => {
 
   let state = {};
 
-  let query = `SELECT ${foreignModel.tableName}.* FROM ${
+  let query = `SELECT \`${foreignModel.tableName}\`.* FROM ${
     foreignModel.tableName
     } ${component.query} LIMIT 1000`;
   let bindings = component.bindings || [];
@@ -100,13 +100,6 @@ module.exports = ctx => async ({ componentId, recordId }) => {
   bindings = bindings.map(binding => template(binding)({ source, model }));
 
   const rows = await ctx.db.query(query, bindings);
-
-  const [{ totalCount }] = await ctx.db.query(
-    `SELECT COUNT(*) as totalCount FROM ${foreignModel.tableName} ${
-    component.query
-    } LIMIT 1`,
-    bindings
-  );
 
   const records = transformMany(foreignModel, rows);
 
